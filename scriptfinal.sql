@@ -1,7 +1,8 @@
+
+DROP DATABASE escola;
 -- -----------------------------------------------------
 -- Schema escola
 -- -----------------------------------------------------
-DROP DATABASE escola;
 CREATE DATABASE escola;
 USE escola;
 
@@ -21,7 +22,7 @@ CREATE TABLE responsavel (
 CREATE TABLE aluno (
   id_aluno INT NOT NULL PRIMARY KEY auto_increment,
   cpf_aluno VARCHAR(45) NOT NULL ,
-  id_resposavel INT,
+  id_responsavel INT,
    FOREIGN KEY ( id_responsavel )
 	REFERENCES  responsavel  ( id_responsavel ));
 
@@ -30,7 +31,7 @@ CREATE TABLE aluno (
 -- Table   turma 
 -- -----------------------------------------------------
 CREATE TABLE turma (
-  idturma INT NOT NULL PRIMARY KEY auto_increment,
+  id_turma INT NOT NULL PRIMARY KEY auto_increment,
   curso VARCHAR(45) NOT NULL,
   instituicao VARCHAR(45) NOT NULL);
 
@@ -48,7 +49,7 @@ CREATE TABLE professor (
 -- Table   endereco 
 -- -----------------------------------------------------
 CREATE TABLE endereco (
-  cep VARCHAR(246) NOT NULL PRIMARY KEY,
+  cep int NOT NULL PRIMARY KEY,
   numero INT NOT NULL);
 
 
@@ -73,7 +74,7 @@ CREATE TABLE endereco_has_responsavel (
   id_responsavel int,
     FOREIGN KEY ( endereco_cep )
     REFERENCES  endereco  ( cep ),
-    FOREIGN KEY ( id_responsavel )
+    FOREIGN KEY ( id_responsavel )SSSS
     REFERENCES   responsavel  ( id_responsavel ));
    
 
@@ -96,13 +97,13 @@ CREATE TABLE aluno_has_endereco (
 CREATE TABLE  materia  (
    id_materia INT NOT NULL PRIMARY KEY auto_increment,
    professor_siape  INT ,
-   turma_idturma  INT ,
+   id_turma  INT ,
    unidade_curricular  VARCHAR(45) NOT NULL,
    dia  VARCHAR(45) NOT NULL,
     FOREIGN KEY ( professor_siape )
     REFERENCES   professor  ( siape ),
-    FOREIGN KEY ( turma_idturma )
-    REFERENCES   turma  ( idturma ));
+    FOREIGN KEY ( id_turma )
+    REFERENCES   turma  ( id_turma ));
 
 -- -----------------------------------------------------
 -- Table  aluno_has_turma 
@@ -113,7 +114,7 @@ CREATE TABLE  aluno_has_turma  (
     FOREIGN KEY (id_aluno )
     REFERENCES   aluno  ( id_aluno ),
     FOREIGN KEY ( turma_idturma )
-    REFERENCES   turma  ( idturma ));
+    REFERENCES   turma  ( id_turma ));
 
 
 -- insert
@@ -189,14 +190,132 @@ VALUES ('Matematica', 'sexta-feira'),
 ('Informatica', 'sexta-feira'),
 ('Quimica', 'segunda-feira');
 
--- update
-UPDATE 
+-- update 
+UPDATE responsavel
+set cpf = '537.667.756-77' WHERE id_responsavel = 1;
+UPDATE responsavel
+set cpf = '628.315.060-85' WHERE id_responsavel = 2;
+UPDATE responsavel
+set cpf = '142.258.312-05' WHERE id_responsavel = 3;
+UPDATE responsavel
+set cpf = '601.140.275-52' WHERE id_responsavel = 4;
+UPDATE responsavel
+set cpf = '507.754.006-37' WHERE id_responsavel = 5;
+
+UPDATE aluno
+set cpf_aluno = '434.408.608-25' WHERE id_aluno = 1;
+UPDATE aluno
+set cpf_aluno = '836.401.711-01' WHERE id_aluno = 2;
+UPDATE aluno
+set cpf_aluno = '216.453.148-55' WHERE id_aluno = 3;
+UPDATE aluno
+set cpf_aluno = '875.311.621-64' WHERE id_aluno = 4;
+UPDATE aluno
+set cpf_aluno = '242.646.321-02' WHERE id_aluno = 5;
+
+UPDATE turma
+set curso = 'Quimica' WHERE id_turma = 1;
+UPDATE turma
+set curso = 'Matematica' WHERE id_turma = 2;
+UPDATE turma
+set curso = 'Portugues' WHERE id_turma = 3;
+UPDATE turma
+set curso = 'Sociologia' WHERE id_turma = 4;
+UPDATE turma
+set curso = 'Filosofia' WHERE id_turma = 5;
 
 
+UPDATE professor
+set area = 'Matemática' WHERE siape = 8888;
+UPDATE professor
+set area = 'Português' WHERE siape = 8697;
+UPDATE professor
+set area = 'Biologia' WHERE siape = 9635;
+UPDATE professor
+set area = 'Inglês' WHERE siape = 5247;
+UPDATE professor
+set area = 'Filosofia' WHERE siape = 5834;
+
+UPDATE endereco
+set numero = '2454' WHERE cep = '85303-775';
+UPDATE endereco
+set numero = '24' WHERE cep = '29937-300';
+UPDATE endereco
+set numero = '567' WHERE cep = '57315-222';
+UPDATE endereco
+set numero = '901' WHERE cep = '38181-471';
+UPDATE endereco
+set numero = '22' WHERE cep = '65082-796';
+
+UPDATE materia
+set dia = 'Segunda-Feira' WHERE id_turma = 1;
+UPDATE materia
+set dia = 'Terça-Feira' WHERE id_turma = 2;
+UPDATE materia
+set dia = 'Segunda-Feira' WHERE id_turma = 3;
+UPDATE materia
+set dia = 'Quinta-Feira' WHERE id_turma = 4;
+UPDATE materia
+set dia = 'Sexta-Feira' WHERE id_turma = 5;
+
+-- delete 
+DELETE FROM responsavel WHERE id_responsavel = 1;
+DELETE FROM responsavel WHERE id_responsavel = 2;
+DELETE FROM responsavel WHERE id_responsavel = 3;
+DELETE FROM responsavel WHERE id_responsavel = 4;
+DELETE FROM responsavel WHERE id_responsavel = 5;
+
+DELETE FROM aluno WHERE id_aluno = 1;
+DELETE FROM aluno WHERE id_aluno = 2;
+DELETE FROM aluno WHERE id_aluno = 3;
+DELETE FROM aluno WHERE id_aluno = 4;
+DELETE FROM aluno WHERE id_aluno = 5;
+
+DELETE FROM turma WHERE id_turma =1;
+DELETE FROM turma WHERE id_turma =2;
+DELETE FROM turma WHERE id_turma =3;
+DELETE FROM turma WHERE id_turma =4;
+DELETE FROM turma WHERE id_turma =5;
+
+DELETE FROM professor WHERE siape =8888;
+DELETE FROM professor WHERE siape =8697;
+DELETE FROM professor WHERE siape =9635;
+DELETE FROM professor WHERE siape =5247;
+DELETE FROM professor WHERE siape =5834;
 
 
--- delete
+DELETE FROM endereco WHERE cep = 85303-775;
+DELETE FROM endereco WHERE cep = 29937-300;
+DELETE FROM endereco WHERE cep = 57315-222;
+DELETE FROM endereco WHERE cep = 38181-471;
+DELETE FROM endereco WHERE cep = 65082-796;
+
+DELETE FROM materia WHERE id_materia = 1;
+DELETE FROM materia WHERE id_materia = 2;
+DELETE FROM materia WHERE id_materia = 3;
+DELETE FROM materia WHERE id_materia = 4;
+DELETE FROM materia WHERE id_materia = 5;
 
 -- selects
+
+select * from responsavel order by id_responsavel asc;
+select * from aluno order by id_aluno asc;
+select * from turma order by id_turma asc;
+select * from  professor order by siape asc;
+select * from endereco order by cep asc;
+select * from materia order by id_materia asc;
+
+select * from responsavel where id_responsavel = 10;
+select * from aluno where id_aluno = 10;
+select * from turma where id_turma = 10;
+select * from professor where siape = 4517;
+select * from endereco where cep = 69307-690;
+select * from materia  where id_materia  = 10;
+
+
+select responsavel.id_responsavel, aluno.id_aluno
+from responsavel inner join responsavel on
+responsavel.id_resposansavel = aluno.id_aluno;
+
 
 DROP DATABASE escola;
