@@ -57,9 +57,10 @@ CREATE TABLE endereco (
 -- Table   aluno_has_responsavel 
 -- -----------------------------------------------------
 CREATE TABLE aluno_has_responsavel (
-  id_aluno INT,
+  aluno_id_aluno INT,
   id_responsavel INT ,
-    FOREIGN KEY (id_aluno)
+  PRIMARY KEY( aluno_id_aluno, aluno_id_aluno ),
+    FOREIGN KEY (aluno_id_aluno)
     REFERENCES aluno (id_aluno),
     FOREIGN KEY (id_responsavel)
     REFERENCES  responsavel (id_responsavel));
@@ -71,10 +72,11 @@ CREATE TABLE aluno_has_responsavel (
 -- -----------------------------------------------------
 CREATE TABLE endereco_has_responsavel (
   endereco_cep VARCHAR (246),
-  id_responsavel int,
+  endereco_id_responsavel int,
+   PRIMARY KEY (endereco_id_responsavel, endereco_id_responsavel),
     FOREIGN KEY ( endereco_cep )
     REFERENCES  endereco  ( cep ),
-    FOREIGN KEY ( id_responsavel )SSSS
+    FOREIGN KEY ( endereco_id_responsavel )
     REFERENCES   responsavel  ( id_responsavel ));
    
 
@@ -83,10 +85,11 @@ CREATE TABLE endereco_has_responsavel (
 -- Table  aluno_has_endereco 
 -- -----------------------------------------------------
 CREATE TABLE aluno_has_endereco (
-   id_aluno int,
+   endereco_id_aluno int,
    endereco_cep  VARCHAR(246) ,
+   PRIMARY KEY (endereco_id_aluno ,endereco_id_aluno ),
     FOREIGN KEY ( id_aluno)
-    REFERENCES   aluno  ( id_aluno),
+    REFERENCES   aluno  ( endereco_id_aluno),
     FOREIGN KEY ( endereco_cep )
     REFERENCES  endereco  ( cep ));
 
@@ -109,9 +112,10 @@ CREATE TABLE  materia  (
 -- Table  aluno_has_turma 
 -- -----------------------------------------------------
 CREATE TABLE  aluno_has_turma  (
-   id_aluno INT,
+   turma_id_aluno INT,
    turma_idturma  INT,
-    FOREIGN KEY (id_aluno )
+   PRIMARY KEY ( turma_id_aluno, turma_id_aluno),
+    FOREIGN KEY (turma_id_aluno )
     REFERENCES   aluno  ( id_aluno ),
     FOREIGN KEY ( turma_idturma )
     REFERENCES   turma  ( id_turma ));
